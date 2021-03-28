@@ -59,6 +59,9 @@
         <div class="col-lg-8" id="main-area">
             <!-- Title -->
             <h1 class="mt-4">{{ post.title }}</h1>
+            {% if post.hook_text %}
+                <h5 class="text-muted">{{ post.hook_text }}</h5>
+            {% endif %}
 
             <!-- Author -->
             <p class="lead">
