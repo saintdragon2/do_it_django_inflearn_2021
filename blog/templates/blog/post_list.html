@@ -78,32 +78,36 @@
 
         <div class="container">
             <div class="row my-3">
-                <div class="col-md-8 col-lg-9">
+                <div class="col-md-8 col-lg-9" id="main-area">
                     <h1>Blog</h1>
 
-                    {% for p in post_list %}
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        {% if p.head_image %}
-                            <img class="card-img-top" src="{{ p.head_image.url }}" alt="{{ p.title }}">
-                        {% else %}
-                            <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/600/200" alt="{{ p.title }}">
-                        {% endif %}
-                        <div class="card-body">
-                        <h2 class="card-title">{{ p.title }}</h2>
-                        {% if p.hook_text %}
-                            <h5 class="text-muted">{{ p.hook_text }}</h5>
-                        {% endif %}
-                        <p class="card-text">{{ p.content | truncatewords:45 }}</p>
-                        <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
-                        </div>
-                        <div class="card-footer text-muted">
-                        Posted on {{ p.created_at }} by
-                        <a href="#">작성자명 쓸 위치(개발예정)</a>
-                        </div>
-                    </div>
-                    {% endfor %}
+                    {% if post_list.exists %}
 
+                        {% for p in post_list %}
+                        <!-- Blog Post -->
+                        <div class="card mb-4">
+                            {% if p.head_image %}
+                                <img class="card-img-top" src="{{ p.head_image.url }}" alt="{{ p.title }}">
+                            {% else %}
+                                <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/600/200" alt="{{ p.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                            <h2 class="card-title">{{ p.title }}</h2>
+                            {% if p.hook_text %}
+                                <h5 class="text-muted">{{ p.hook_text }}</h5>
+                            {% endif %}
+                            <p class="card-text">{{ p.content | truncatewords:45 }}</p>
+                            <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                            Posted on {{ p.created_at }} by
+                            <a href="#">작성자명 쓸 위치(개발예정)</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <h1>아직 게시물이 없습니다</h1>
+                    {% endif %}
                     <!-- Pagination -->
                     <ul class="pagination justify-content-center mb-4">
                         <li class="page-item">
