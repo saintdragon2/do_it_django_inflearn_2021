@@ -39,11 +39,11 @@
                         <ul>
                             {% for category in categories %}
                             <li>
-                                <a href="#">{{ category.name }} ({{ category.post_set.count }})</a>
+                                <a href="{{ category.get_absolute_url }}">{{ category.name }} ({{ category.post_set.count }})</a>
                             </li>
                             {% endfor %}
                             <li>
-                                <a href="#">미분류 ({{ no_category_post_count }})</a>
+                                <a href="/blog/category/no_category/">미분류 ({{ no_category_post_count }})</a>
                             </li>
                         </ul>
 
