@@ -1,5 +1,5 @@
 {% extends 'blog/base_full_width.html' %}
-
+{% load crispy_forms_tags %}
 {% block head_title%}Create Post - Blog{% endblock %}
 
 {% block main_area %}
@@ -8,11 +8,11 @@
 
 <form method="post" enctype="multipart/form-data">{% csrf_token %}
     <table>
-        {{ form }}
-        <tr>
-            <th><label for="id_tags_str">Tags:</label></th>
-            <td><input type="text" name="tags_str" id="id_tags_str"></td>
-        </tr>
+        {{ form | crispy }}
+        <div id="div_id_tags_str">
+            <label for="id_tags_str">Tags:</label>
+            <input type="text" name="tags_str" id="id_tags_str" class="textinput textInput form-control">
+        </div>
     </table>
     <button type="submit" class="btn btn-primary float-right">Submit</button>
 </form>
