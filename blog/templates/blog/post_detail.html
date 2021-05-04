@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
 {% block head_title %}
-    {{ post.title }} | Blog
+{{ post.title }} | Blog
 {% endblock %}
 
 {% block main_area %}
@@ -26,7 +26,7 @@
     <hr>
 
     {% if user.is_authenticated and user == post.author %}
-        <a type="button" href="/blog/update_post/{{ post.pk }}/" class="btn btn-info btn-sm float-right"><i class="fas fa-pen"></i>&nbsp;&nbsp; Edit Post</a>
+    <a type="button" href="/blog/update_post/{{ post.pk }}/" class="btn btn-info btn-sm float-right"><i class="fas fa-pen"></i>&nbsp;&nbsp; Edit Post</a>
     {% endif %}
     <!-- Date/Time -->
     <p>Posted on {{ post.created_at }}</p>
@@ -46,12 +46,12 @@
     <p>{{ post.get_content_markdown | safe }}</p>
 
     {% if post.tags.exists %}
-        <i class="fas fa-tags"></i>
-        {% for tag in post.tags.iterator %}
-            <a href="{{ tag.get_absolute_url }}"><span class="badge bg-light text-dark">{{ tag }}</span></a>
-        {% endfor %}
-        <br/>
-        <br/>
+    <i class="fas fa-tags"></i>
+    {% for tag in post.tags.iterator %}
+    <a href="{{ tag.get_absolute_url }}"><span class="badge bg-light text-dark">{{ tag }}</span></a>
+    {% endfor %}
+    <br/>
+    <br/>
     {% endif %}
 
     {% if post.file_upload %}
@@ -88,22 +88,31 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             {% else %}
-                <a role="button" type="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
+            <a role="button" type="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
             {% endif %}
         </div>
     </div>
 
     {% if post.comment_set.exists %}
-        {% for comment in post.comment_set.iterator %}
-        <!-- Single Comment -->
-        <div class="media mb-4" id="comment-{{ comment.pk }}">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-                <h5 class="mt-0">{{ comment.author.username }} &nbsp;&nbsp; <small class="text-muted">{{ comment.created_at }}</small></h5>
-                {{ comment.content | linebreaks }}
-            </div>
+    {% for comment in post.comment_set.iterator %}
+    <!-- Single Comment -->
+    <div class="media mb-4" id="comment-{{ comment.pk }}">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+            {% if user.is_authenticated and comment.author == user %}
+            <a class="btn btn-sm btn-info float-right"
+               role="button"
+               id="comment-{{ comment.pk }}-update-btn"
+               href="/blog/update_comment/{{ comment.pk }}/">edit</a>
+            {% endif %}
+            <h5 class="mt-0">{{ comment.author.username }} &nbsp;&nbsp; <small class="text-muted">{{ comment.created_at }}</small></h5>
+            {{ comment.content | linebreaks }}
+            {% if comment.is_updated %}
+                <p class="text-muted float-right">Updated: {{ comment.updated_at }}</p>
+            {% endif %}
         </div>
-        {% endfor %}
+    </div>
+    {% endfor %}
     {% endif %}
 
 
