@@ -22,10 +22,10 @@
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" class="form-control" placeholder="Search for..." id="search-input">
                         <span class="input-group-append">
-                            <button class="btn btn-secondary" type="button">Go!</button>
-                            </span>
+                            <button class="btn btn-secondary" type="button" onclick="searchPost();">Go!</button>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -56,6 +56,24 @@
     </div>
 
 </div>
+
+<script>
+    function searchPost(){
+        let searchValue = document.getElementById('search-input').value.trim();
+        if (searchValue.length > 1){
+            location.href="/blog/search/"+ searchValue + "/";
+        }
+        else{
+            alert('검색어(' + searchValue + ')가 너무 짧습니다.');
+        }
+    };
+
+    document.getElementById('search-input').addEventListener('keyup', function(event){
+        if(event.key == 'Enter'){
+            searchPost();
+        }
+    })
+</script>
 
 {% include 'blog/footer.html' %}
 
