@@ -100,10 +100,44 @@
         <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
         <div class="media-body">
             {% if user.is_authenticated and comment.author == user %}
-            <a class="btn btn-sm btn-info float-right"
-               role="button"
-               id="comment-{{ comment.pk }}-update-btn"
-               href="/blog/update_comment/{{ comment.pk }}/">edit</a>
+            <div class="float-right">
+                <a class="btn btn-sm btn-info"
+                   role="button"
+                   id="comment-{{ comment.pk }}-update-btn"
+                   href="/blog/update_comment/{{ comment.pk }}/">edit</a>
+                <a class="btn btn-sm btn-danger"
+                   role="button"
+                   id="comment-{{ comment.pk }}-delete-btn"
+                   data-toggle="modal"
+                   data-target="#deleteCommentModal-{{ comment.pk }}"
+                   href="#">delete</a>
+            </div>
+
+            <!-- Modal {{ comment.pk }} -->
+            <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1" aria-labelledby="delteCommentModal-{{ comment.pk }}-ModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteCommentModalLabel-{{ comment.pk }}">Are You Sure?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <del>{{ comment | linebreaks }}</del>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a role="button"
+                               type="button"
+                               class="btn btn-danger"
+                               href="/blog/delete_comment/{{ comment.pk }}/">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endif %}
             <h5 class="mt-0">{{ comment.author.username }} &nbsp;&nbsp; <small class="text-muted">{{ comment.created_at }}</small></h5>
             {{ comment.content | linebreaks }}
