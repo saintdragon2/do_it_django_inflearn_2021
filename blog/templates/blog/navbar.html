@@ -25,7 +25,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {% if user.socialaccount_set.first.get_avatar_url %}
-                                <img clas="rounded-circle"
+                                <img class="rounded-circle"
                                      width="25px"
                                      src="{{ user.socialaccount_set.first.get_avatar_url }}"
                                      alt="{{ user.username }}">
