@@ -24,6 +24,18 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% if user.socialaccount_set.first.get_avatar_url %}
+                                <img clas="rounded-circle"
+                                     width="25px"
+                                     src="{{ user.socialaccount_set.first.get_avatar_url }}"
+                                     alt="{{ user.username }}">
+                            {% else %}
+                                <img class="rounded-circle"
+                                     width="25px"
+                                     src="https://doitdjango.com/avatar/id/143/e3445497d896a175/svg/{{ user.email }}"
+                                     alt="{{ user.username }}">
+                            {% endif %}
+                            &nbsp;
                             {{ user.username }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
