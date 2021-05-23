@@ -131,3 +131,6 @@ dmypy.json
 .idea/
 migrations/
 _media/
+
+#.env.prod      # 여러분은 이 부분을 주석처리 하면 안됩니다.
+#.env.prod.db   # 여러분은 이 부분을 주석처리 하면 안됩니다.
