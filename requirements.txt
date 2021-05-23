@@ -23,6 +23,7 @@ parso==0.8.2
 pickleshare==0.7.5
 Pillow==8.1.2
 prompt-toolkit==3.0.18
+psycopg2-binary==2.8.6
 pycparser==2.20
 Pygments==2.8.1
 PyJWT==2.0.1
