@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block main_area %}
+
+<div class="card">
+  <div class="card-body">
+      <h4 class="card-title">{{ board.title }}</h4>
+
+      <p class="float-right">{{ board.created_at }}</p>
+      {{ board.author }}
+      <hr/>
+      {{ board.content }}
+  </div>
+</div>
+
+{% endblock %}
