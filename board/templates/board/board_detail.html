@@ -9,7 +9,7 @@
       <p class="float-right">{{ board.created_at }}</p>
       {{ board.author }}
       <hr/>
-      {{ board.content }}
+      {{ board.content | safe }}
   </div>
 </div>
 

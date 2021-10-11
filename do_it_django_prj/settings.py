@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'markdownx',
+    'django_summernote',
 
     'blog',
     'single_pages',
@@ -160,3 +161,5 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LOGIN_REDIRECT_URL = '/blog/'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
